@@ -7,7 +7,7 @@
     "version": "1.0.0",
     "dependencies": {
       "game": "1.21.5",
-      "queueapi": "1.0.1"
+      "queueapi": "2.0.0"
     },
     "side": "Server",
     "requiredOnServer": true,
