@@ -47,7 +47,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\QueueAPI\QueueAPI.csproj" Condition="Exists('..\QueueAPI\QueueAPI.csproj')" />
-      <PackageReference Include="Cecer.VintageStory.QueueAPI" Condition="!Exists('..\QueueAPI\QueueAPI.csproj')" />
+      <PackageReference Include="Cecer.VintageStory.QueueAPI" Version="[2.0,3.0)" Condition="!Exists('..\QueueAPI\QueueAPI.csproj')" />
     </ItemGroup>
 
 </Project>
