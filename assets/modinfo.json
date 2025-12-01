@@ -2,7 +2,7 @@
     "type": "code",
     "modid": "moddownloadqueuebypass",
     "name": "Mod Download Queue Bypass",
-    "description" : "Allows users to bypass the join queue if they had to download mods.",
+    "description" : "Allows players to bypass the join queue if they had to download mods.",
     "authors": ["Cecer"],
     "version": "1.0.0",
     "dependencies": {

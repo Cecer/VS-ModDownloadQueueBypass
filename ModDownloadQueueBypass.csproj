@@ -5,7 +5,17 @@
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
         <OutputPath>bin\$(Configuration)\Mods</OutputPath>
         <Nullable>enable</Nullable>
+        <Version>1.0.0</Version>
+        <AssemblyVersion>1.0.0</AssemblyVersion>
+        <FileVersion>1.0.0</FileVersion>
         <RootNamespace>ModDownloadQueueBypass</RootNamespace>
+
+        <Title>Mod Download Queue Bypass</Title>
+        <Description>Allows players to bypass the join queue if they had to download mods.</Description>
+        <PackageId>Cecer.VinageStory.ModDownloadQueueBypass</PackageId>
+        <RepositoryUrl>https://github.com/Cecer/VS-ModDownloadQueueBypass/</RepositoryUrl>
+        <PackageProjectUrl>https://mods.vintagestory.at/moddownloadqueuebypass</PackageProjectUrl>
+        <EmbedAllSources>true</EmbedAllSources>
     </PropertyGroup>
 
     <ItemGroup>
@@ -36,7 +46,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\QueueAPI\QueueAPI.csproj" />
+      <ProjectReference Include="..\QueueAPI\QueueAPI.csproj" Condition="Exists('..\QueueAPI\QueueAPI.csproj')" />
+      <PackageReference Include="Cecer.VintageStory.QueueAPI" Condition="!Exists('..\QueueAPI\QueueAPI.csproj')" />
     </ItemGroup>
 
 </Project>
