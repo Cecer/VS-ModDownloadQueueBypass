@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Vintagestory.API.Server;
 
-namespace ModDownloadQueueBypass;
+namespace RequeueRelief;
 
 public class BypassTicketManager(ICoreServerAPI api)
 {
@@ -21,7 +21,7 @@ public class BypassTicketManager(ICoreServerAPI api)
         {
             if (_ticketsByPlayerUid.TryGetValue(playerUid, out var ticket) && ticket.IsValid && invalidateIfValid)
             {
-                api.Logger.Notification($"[MDQB] Consuming bypass ticket for player {playerUid}");
+                api.Logger.Notification($"[RequeueRelief] Consuming bypass ticket for player {playerUid}");
                 InvalidateTicket(ticket);
                 return true;
             }
@@ -38,21 +38,21 @@ public class BypassTicketManager(ICoreServerAPI api)
             InvalidateAllTicketsByPlayer(playerUid);
             _ticketsByPlayerUid[playerUid] = ticket;
         }
-        api.Logger.Notification($"[MDQB] Bypass ticket issued for player {playerUid}");
+        api.Logger.Notification($"[RequeueRelief] Bypass ticket issued for player {playerUid}");
         OnTicketIssued?.Invoke(ticket);
         
 
-        api.Logger.Notification($"[MDQB] Expires in {expireAfter.TotalMilliseconds}ms");
+        api.Logger.Notification($"[RequeueRelief] Expires in {expireAfter.TotalMilliseconds}ms");
         ticket.ListenerId = api.Event.RegisterCallback(_ =>
         {
-            api.Logger.Notification($"[MDQB] Invalidating due to expiry for {playerUid}");
+            api.Logger.Notification($"[RequeueRelief] Invalidating due to expiry for {playerUid}");
             InvalidateTicket(ticket);
         }, (int) expireAfter.TotalMilliseconds, true);
     }
 
     public void InvalidateAllTicketsByPlayer(string playerUid)
     {
-        api.Logger.Notification($"[MDQB] Invalidate all bypass ticket issued for player {playerUid}");
+        api.Logger.Notification($"[RequeueRelief] Invalidate all bypass ticket issued for player {playerUid}");
         lock (_ticketsByPlayerUid)
         {
             if (_ticketsByPlayerUid.Remove(playerUid, out var ticket))
@@ -64,7 +64,7 @@ public class BypassTicketManager(ICoreServerAPI api)
 
     public void InvalidateTicket(QueueBypassTicket ticket)
     {
-        api.Logger.Notification($"[MDQB] Invalidating bypass ticket issued for player {ticket.PlayerId} ({ticket.ListenerId})");
+        api.Logger.Notification($"[RequeueRelief] Invalidating bypass ticket issued for player {ticket.PlayerId} ({ticket.ListenerId})");
         lock (_ticketsByPlayerUid)
         {
             if (ticket.ListenerId == -1)
@@ -90,7 +90,7 @@ public class BypassTicketManager(ICoreServerAPI api)
         {
             _ticketsByPlayerUid.Clear();
         }
-        api.Logger.Notification("[MDQB] Invalidating all bypass tickets");
+        api.Logger.Notification("[RequeueRelief] Invalidating all bypass tickets");
     }
 
     public List<QueueBypassTicket> GetPlayersWithTicket()

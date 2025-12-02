@@ -1,9 +1,9 @@
 {
     "type": "code",
-    "modid": "moddownloadqueuebypass",
-    "name": "Mod Download Queue Bypass",
-    "description" : "Allows players to bypass the join queue if they had to download mods.",
-    "authors": ["Cecer"],
+    "modid": "requeuerelief",
+    "name": "Requeue Relief",
+    "description" : "Allows players to bypass the join queue when rejoining based on configurable conditions.",
+    "authors": [ "Cecer" ],
     "version": "1.0.0",
     "dependencies": {
       "game": "1.21.5",
